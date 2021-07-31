@@ -4,9 +4,34 @@
   
     
     <entry>
-      <title>git-cz的使用</title>
-      <link href="2021/07/19/git-cz%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
-      <url>2021/07/19/git-cz%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
+      <title>前端团队建设（一）</title>
+      <link href="2021/07/30/%E5%89%8D%E7%AB%AF%E5%9B%A2%E9%98%9F%E5%BB%BA%E8%AE%BE%EF%BC%88%E4%B8%80%EF%BC%89/"/>
+      <url>2021/07/30/%E5%89%8D%E7%AB%AF%E5%9B%A2%E9%98%9F%E5%BB%BA%E8%AE%BE%EF%BC%88%E4%B8%80%EF%BC%89/</url>
+      
+        <content type="html"><![CDATA[<h3 id="第一步代码提交规范"><a href="#第一步代码提交规范" class="headerlink" title="第一步代码提交规范"></a>第一步代码提交规范</h3><p>项目组人少项目多，基本是2到3人负责一个项目，不存在大规模协作开发的问题，且各个项目的开发，测试，预发布，生产环境各不相同。所以，面对当前的情况，我们采取较为宽松的方式进行git开发流程的管理。预发布（demo）分支可选，但是有一个底线，除了feature分支外其它分支不允许直接提交代码，只能合并。除master分支外，其它分支开发新功能及合并代码前必须先合入master分支。</p><p><img src="/2021/07/30/%E5%89%8D%E7%AB%AF%E5%9B%A2%E9%98%9F%E5%BB%BA%E8%AE%BE%EF%BC%88%E4%B8%80%EF%BC%89/%E5%8C%85%E5%90%ABdemo.png" alt="包含demo"><br><img src="/2021/07/30/%E5%89%8D%E7%AB%AF%E5%9B%A2%E9%98%9F%E5%BB%BA%E8%AE%BE%EF%BC%88%E4%B8%80%EF%BC%89/%E4%B8%8D%E5%8C%85%E5%90%ABdemo.png" alt="不包含demo"></p><h4 id="分支说明"><a href="#分支说明" class="headerlink" title="分支说明"></a>分支说明</h4><ol><li><p>master分支</p><pre><code> 生产分支：master分支保存的永远是线上使用中的代码，且master分支的代码必须保证能正常运行，不允许将代码直接推送到master分支，只有测试无误，要发布生产环境时才可以将最新的代码从其它分支合并入master分支。</code></pre></li><li><p>demo分支（可选）</p><pre><code> 预发布分支：测试通过后，将测试分支合并到预发布分支，供项目相关方进行验收，验收通过后可合并到master分支进行发布。不允许将代码直接推送到demo分支，如果有bug产生，到test分支拉取feature分支修复bug，修复完成后合并到test分支，由测试人员进行测试，测试通过后再由test分支合并到demo分支。</code></pre></li><li><p>test分支</p><pre><code>测试分支：开发人员在开始新版本的开发前，先合并master分支的代码到test分支，然后再从test分支拉取特性（feature）分支进行新版本功能的开发，开发完成后将特性（feature）分支合并到test分支。</code></pre></li><li><p>feature分支</p><pre><code> 特性分支： 用于开发人员开发新功能使用，开发人员可将代码直接推送到特性分支，开发完成后合并到test分支。发布上线后可将该分支删除。</code></pre></li><li><p>hotfix分支<br>   热修分支：如果线上版本出现很紧急的bug要修复，就需要在hotfix分支进行开发，开发前先合并master分支的代码，修复完成且测试通过后将代码合并到master分支进行分布。</p></li></ol><h4 id="GIT操作步骤"><a href="#GIT操作步骤" class="headerlink" title="GIT操作步骤"></a>GIT操作步骤</h4><ol><li><p>当前master分支的版本是0.1.0，现在要进行0.2.0的开发，这时候需要将master分支合并到test分支</p><pre><code>git checkout testgit merge master</code></pre></li><li><p>开发人员从test分支拉取feature分支进行开发，开发人员可在此分支进行代码的拉取和上传等操作</p><pre><code>git checkout -b feature-0.2.0-a或者git branch feature-0.2.0-agit checkout feature-0.2.0-a</code></pre></li><li><p>开发完成后先将master分支合并到test分支，再将feature分支合并到test分支，测试产生的bug继续在feature分支上修改，修改完成后合并到test分支，每次合并test分之前都必须合入master的代码到test分支，如此往复</p><pre><code>git checkout testgit merge mastergit merge feature-0.2.0-a</code></pre></li><li><p>测试完毕后，先将master分支合入demo分支，再将test分支的代码合入到demo分支 （可选）</p><pre><code>git checkout demogit merge mastergit merge test</code></pre></li><li><p>相关方在验收完成后将demo分支合并到master分支进行发布，打tag 0.2.0并将feature分支删除  </p><pre><code> git checkkout master git merge demo git tag -a 0.2.0 -m &quot;publish 0.2.0 version&quot;</code></pre></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> 零散知识点 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 团队建设 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>commitizen的使用</title>
+      <link href="2021/07/19/commitizen%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
+      <url>2021/07/19/commitizen%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
       
         <content type="html"><![CDATA[<h3 id="安装使用"><a href="#安装使用" class="headerlink" title="安装使用"></a>安装使用</h3><p>在命令行输入以下三道命令：</p><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="keyword">install</span> -g commitizen</span><br><span class="line">npm <span class="keyword">install</span> -g cz-conventional-changelog</span><br><span class="line">echo &#x27;&#123; <span class="string">&quot;path&quot;</span>: <span class="string">&quot;cz-conventional-changelog&quot;</span> &#125;&#x27; &gt; ~/.czrc</span><br></pre></td></tr></table></figure><p>在git commit时改为输入git cz</p><h3 id="第一个参数type含义"><a href="#第一个参数type含义" class="headerlink" title="第一个参数type含义"></a>第一个参数type含义</h3><table><thead><tr><th>值</th><th>描述</th></tr></thead><tbody><tr><td>feat</td><td>新增一个功能</td></tr><tr><td>fix</td><td>修复一个Bug</td></tr><tr><td>docs</td><td>文档变更</td></tr><tr><td>style</td><td>代码格式（不影响功能，例如空格、分号等格式修正）</td></tr><tr><td>refactor</td><td>代码重构</td></tr><tr><td>perf</td><td>改善性能</td></tr><tr><td>test</td><td>测试</td></tr><tr><td>build</td><td>变更项目构建或外部依赖（例如scopes: webpack、gulp、npm等）</td></tr><tr><td>ci</td><td>更改持续集成软件的配置文件和package中的scripts命令，例如scopes: Travis, Circle等</td></tr><tr><td>chore</td><td>变更构建流程或辅助工具</td></tr><tr><td>revert</td><td>代码回退</td></tr><tr><td>scope</td><td></td></tr></tbody></table>]]></content>
       
